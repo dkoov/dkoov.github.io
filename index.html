@@ -134,20 +134,9 @@ body {
 /* section base */
 section { margin: 56px 0; position: relative; }
 .s-head {
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 28px;
-  align-items: baseline;
   margin-bottom: 24px;
   padding-bottom: 14px;
   border-bottom: 1px solid var(--line-soft);
-}
-.s-head .num {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  color: var(--muted);
-  text-transform: uppercase;
 }
 .s-head h2 {
   font-family: "Fraunces", serif;
@@ -155,11 +144,6 @@ section { margin: 56px 0; position: relative; }
   font-size: 26px;
   margin: 0;
   letter-spacing: -0.01em;
-}
-.s-head h2 em {
-  font-style: italic;
-  color: var(--accent-2);
-  font-weight: 400;
 }
 
 /* about */
@@ -233,6 +217,11 @@ section { margin: 56px 0; position: relative; }
   border-color: var(--muted);
   color: var(--muted);
 }
+.project .side a {
+  color: var(--accent-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
 .project h3 {
   font-family: "Fraunces", serif;
   font-variation-settings: "opsz" 60, "wght" 500;
@@ -241,7 +230,6 @@ section { margin: 56px 0; position: relative; }
   margin: -6px 0 4px;
   line-height: 1.1;
 }
-.project h3 em { font-style: italic; color: var(--accent-2); font-weight: 400; }
 .project .sub {
   font-size: 16px;
   font-style: italic;
@@ -364,7 +352,7 @@ footer .blink {
   .head .stamp { display: none; }
   .head h1 { font-size: 44px; }
   .head .role { font-size: 18px; }
-  .s-head, .stack, .project, .edu, .extras-row {
+  .stack, .project, .edu, .extras-row {
     grid-template-columns: 1fr;
     gap: 10px;
   }
@@ -377,10 +365,56 @@ footer .blink {
 }
 
 @media print {
-  body { background: white; background-image: none; }
-  .head .stamp, footer .blink { display: none; }
-  section { page-break-inside: avoid; }
-  a { color: var(--ink) !important; }
+  @page { margin: 14mm; }
+
+  html, body {
+    background: #fff;
+    background-image: none;
+    color: #000;
+    line-height: 1.4;
+  }
+  .about p, .about .lede, .project p, .project ul, .extras-row .val, .edu .where {
+    color: #000;
+  }
+  .project .side, .edu .when, .extras-row .label, .stack .label, .project .sub {
+    color: #444;
+  }
+
+  .head .stamp, footer .blink, .reveal { animation: none; }
+  .reveal { opacity: 1; transform: none; }
+  .head .stamp { display: none; }
+  .head h1 .underline::after { display: none; }
+
+  a { color: #000 !important; border-bottom: none !important; }
+  .head .meta a::after, .project .side a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+
+  .page { max-width: none; padding: 0; }
+  section { margin: 18px 0; }
+  .s-head { margin-bottom: 14px; padding-bottom: 8px; }
+  .head { padding-bottom: 16px; margin-bottom: 22px; }
+  .head h1 { font-size: 40px; }
+  .head .role { font-size: 17px; margin: 4px 0 12px; }
+  .about .lede { font-size: 17px; }
+  .about p { font-size: 13px; }
+  .project { margin-bottom: 20px; }
+  .project h3 { font-size: 19px; }
+  .project .sub { font-size: 13px; margin-bottom: 8px; }
+  .project p { font-size: 12.5px; margin-bottom: 8px; }
+  .project ul { font-size: 12px; margin: 4px 0 8px; }
+  .project ul li { padding-top: 1px; padding-bottom: 1px; }
+  .tag { padding: 2px 8px; font-size: 11px; }
+  .tags { margin-bottom: 10px; }
+  .extras-row { margin-bottom: 10px; }
+  .extras-row .val, .edu .where { font-size: 13px; }
+  footer { margin-top: 28px; padding-top: 14px; }
+
+  .project, .edu, .extras-row, .s-head { break-inside: avoid; page-break-inside: avoid; }
+  .s-head { break-after: avoid; page-break-after: avoid; }
+  section { break-inside: auto; page-break-inside: auto; }
 }
 </style>
 </head>
@@ -405,8 +439,7 @@ footer .blink {
 
   <section class="about reveal d2">
     <div class="s-head">
-      <span class="num">№ 01</span>
-      <h2>О себе <em>— кратко</em></h2>
+      <h2>О себе</h2>
     </div>
     <p class="lede">Студент 3 курса РТУ МИРЭА, направление — <span class="accent">разработка кроссплатформенных бизнес-приложений</span>. Параллельно с учёбой развиваю собственные проекты: full-stack веб-сервисы, мобильные приложения и инфраструктуру на VPS.</p>
     <p>Интересны задачи системного уровня — где нужно собрать решение целиком, от базы данных до интерфейса и развёртывания. Цель — позиция стажёра в направлении backend / full-stack разработки.</p>
@@ -414,8 +447,7 @@ footer .blink {
 
   <section class="stack-section reveal d3">
     <div class="s-head">
-      <span class="num">№ 02</span>
-      <h2>Стек <em>— что использую</em></h2>
+      <h2>Стек</h2>
     </div>
 
     <div class="stack">
@@ -439,6 +471,14 @@ footer .blink {
       </div>
     </div>
     <div class="stack">
+      <div class="label">Java</div>
+      <div class="tags">
+        <span class="tag">Paper API</span>
+        <span class="tag">Velocity</span>
+        <span class="tag">Maven</span>
+      </div>
+    </div>
+    <div class="stack">
       <div class="label">Frontend</div>
       <div class="tags">
         <span class="tag">React</span>
@@ -458,6 +498,13 @@ footer .blink {
       </div>
     </div>
     <div class="stack">
+      <div class="label">Данные</div>
+      <div class="tags">
+        <span class="tag">pandas</span>
+        <span class="tag">LightGBM</span>
+      </div>
+    </div>
+    <div class="stack">
       <div class="label">Аналитика</div>
       <div class="tags">
         <span class="tag">IDEF0</span>
@@ -469,29 +516,56 @@ footer .blink {
 
   <section class="projects-section reveal d4">
     <div class="s-head">
-      <span class="num">№ 03</span>
-      <h2>Проекты <em>— что сделал</em></h2>
+      <h2>Проекты</h2>
     </div>
 
     <div class="project">
       <div class="side">
-        2024 — наст. вр.<br/>
+        2024 — 2026<br/>
         full-stack<br/>
-        <span class="status">в проде</span>
-        <br/>
-        <span class="status wip">код по запросу</span>
+        <a href="https://github.com/dkoov/gryazworld" target="_blank" rel="noopener">исходный код</a>
       </div>
       <div>
-        <h3>GryazWorld <em>— платформа</em></h3>
+        <h3>Ichorix (ранее GryazWorld)</h3>
         <div class="sub">Веб-платформа и инфраструктура для Minecraft-сервера</div>
-        <p>Личный проект: сайт, плагин для игры и backend, объединённые в одну экосистему. Авторизация через Discord OAuth, серверная авторизация по JWT, развёрнуто в Docker на VPS.</p>
+        <p>Личный проект: сайт, backend и игровой плагин, объединённые в одну экосистему. Развёрнуто в Docker на VPS. Проект остановлен в августе 2026.</p>
         <ul>
+          <li>Backend на FastAPI + SQLAlchemy + SQLite: 123 эндпоинта — авторизация, платежи, внутриигровой банк, штрафы, общины, статистика</li>
+          <li>Платежи через ЮKassa: очередь выдачи товаров, повторные попытки при сбое</li>
+          <li>Авторизация через Discord и Twitch OAuth, JWT-сессии</li>
+          <li>Взаимная аутентификация плагина и сайта по общему секрету</li>
           <li>Frontend: React + Vite, мобильная адаптация, встроенная веб-карта (Pl3xMap)</li>
-          <li>Backend: FastAPI + SQLAlchemy + SQLite, REST API, JWT-сессии</li>
-          <li>Minecraft-плагин на Java (Paper 1.21.1): межсерверная телепортация, ATM с GUI, система ролей</li>
-          <li>Discord-бот, OAuth2, уведомления, интеграция с веб-частью</li>
+          <li>Discord-бот: уведомления, интеграция с веб-частью</li>
           <li>Деплой: Docker Compose, HTTPS через Let's Encrypt, отдельный Velocity-прокси</li>
-          <li>В работе: интеграция платежей через ЮKassa, 2FA для аккаунтов</li>
+        </ul>
+        <p>Игровая часть на Java 21 (Paper API 1.21.1):</p>
+        <ul>
+          <li>Система персонажей и ролей — около 45 классов</li>
+          <li>Синхронизация инвентарей между серверами</li>
+          <li>Глобальный таб через сеть Velocity</li>
+          <li>Система наказаний с базой данных</li>
+          <li>Кастомные порталы и межсерверная телепортация</li>
+          <li>ATM с GUI и внутриигровой банк</li>
+          <li>Декомпиляция и доработка сторонних плагинов</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="side">
+        2025 — наст. вр.<br/>
+        full-stack<br/>
+        <span class="status wip">в разработке</span>
+      </div>
+      <div>
+        <h3>mille</h3>
+        <div class="sub">Веб-сервис отслеживания цен на путешествия</div>
+        <p>Слежение за ценами на авиабилеты, отели и пакетные туры с уведомлениями об изменениях.</p>
+        <ul>
+          <li>Backend: FastAPI + SQLite, интеграция с API Travelpayouts</li>
+          <li>Frontend: React + Vite</li>
+          <li>Telegram-бот для уведомлений</li>
+          <li>Развёртывание в Docker</li>
         </ul>
       </div>
     </div>
@@ -503,7 +577,7 @@ footer .blink {
         <span class="status wip">в разработке</span>
       </div>
       <div>
-        <h3>Weather <em>— прогноз погоды</em></h3>
+        <h3>Weather</h3>
         <div class="sub">Приложение на Flutter, работает с внешним API</div>
         <p>Учебный pet-проект на Flutter Web. Интеграция с OpenWeather API, сохранение настроек и истории через localStorage, состояние через стандартные механизмы Flutter.</p>
         <ul>
@@ -515,9 +589,56 @@ footer .blink {
     </div>
   </section>
 
-  <section class="edu-section reveal d5">
+  <section class="projects-section reveal d5">
     <div class="s-head">
-      <span class="num">№ 04</span>
+      <h2>Хакатоны и соревнования</h2>
+    </div>
+
+    <div class="project">
+      <div class="side">
+        2026<br/>
+        frontend<br/>
+        <span class="status">6 место</span>
+      </div>
+      <div>
+        <h3>RoboZon 2026 (Ozon Tech)</h3>
+        <div class="sub">Имитационное моделирование потоков в сортировочном центре — 6 место из 84 команд</div>
+        <p>Командный проект: дискретно-событийная модель сортировочного центра, считающая загрузку операций, очереди, простои и время цикла заявки на горизонтах от минуты до суток.</p>
+        <p>Мой вклад — фронтенд и визуализация:</p>
+        <ul>
+          <li>3D-представление конвейерных линий и сортировщиков на Three.js</li>
+          <li>Интерактивная схема потоков</li>
+          <li>Дашборды метрик с переключением временных горизонтов</li>
+          <li>Интерфейс настройки параметров симуляции</li>
+          <li>Экспорт показателей в CSV</li>
+          <li>Редизайн под фирменный стиль Ozon</li>
+        </ul>
+        <p>Стек: React, TypeScript, Three.js.</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="side">
+        2026<br/>
+        ML<br/>
+        <span class="status">93 место</span>
+      </div>
+      <div>
+        <h3>E-CUP 2026 (Ozon Tech)</h3>
+        <div class="sub">Задача «Ценность пользователей поиска» — 93 место из 316 команд</div>
+        <p>Прогноз GMV пользователя на 30 дней вперёд по логам поисковой активности: 30 млн записей, 250 тыс. пользователей, метрика RMSLE.</p>
+        <ul>
+          <li>Независимая модель на градиентном бустинге: LightGBM, CatBoost, XGBoost</li>
+          <li>Пайплайн генерации признаков</li>
+          <li>Схема валидации по временным якорям без утечек</li>
+          <li>Блендинг моей модели с командной дал лучший результат команды</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="edu-section reveal d6">
+    <div class="s-head">
       <h2>Образование</h2>
     </div>
     <div class="edu">
@@ -530,9 +651,8 @@ footer .blink {
     </div>
   </section>
 
-  <section class="extras-section reveal d6">
+  <section class="extras-section reveal d7">
     <div class="s-head">
-      <span class="num">№ 05</span>
       <h2>Прочее</h2>
     </div>
     <div class="extras-row">
