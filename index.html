@@ -375,6 +375,25 @@ footer .blink {
     line-height: 1.42;
   }
 
+  /* системный шрифт: у декоративного нет корректного соответствия
+     глифов символам, из PDF не извлекаются латиница и цифры */
+  body, .head h1, .head .role, .s-head h2, .about .lede,
+  .project h3, .project .sub, .project p, .project ul,
+  .edu h3, .edu .where, .about p, .extras-row .val {
+    font-family: Georgia, "Times New Roman", serif;
+    font-variation-settings: normal;
+    font-feature-settings: "kern";
+  }
+  .head h1 { font-weight: 600; letter-spacing: -0.02em; }
+  .head h1 .underline { font-weight: 700; }
+  .s-head h2, .project h3, .edu h3 { font-weight: 600; }
+  .mono, .head .stamp, .head .kicker, .head .meta, .project .side,
+  .stack .label, .edu .when, .edu .detail, .extras-row .label,
+  .tag, footer {
+    font-family: "Courier New", ui-monospace, monospace;
+    font-feature-settings: normal;
+  }
+
   /* тон: содержательный текст чёрным, служебный — серым */
   .head h1, .head .role, .s-head h2, .about .lede, .about p,
   .project h3, .project p, .project ul, .edu h3, .edu .where,
@@ -385,6 +404,7 @@ footer .blink {
 
   /* декор, который на бумаге только мешает */
   .head .stamp, footer .blink { display: none; }
+  .head .meta .pdf-link, .head .meta .pdf-sep { display: none; }
   .head h1 .underline::after { display: none; }
   .head .kicker::before, .head .kicker::after { background: #999; }
   .reveal { opacity: 1; transform: none; animation: none; }
@@ -463,6 +483,8 @@ footer .blink {
       <a href="https://t.me/kailunq" target="_blank" rel="noopener">@kailunq</a>
       <span class="dot">/</span>
       <a href="https://github.com/dkoov" target="_blank" rel="noopener">github.com/dkoov</a>
+      <span class="dot pdf-sep">/</span>
+      <a class="pdf-link" href="Prokhorovskiy_CV.pdf" download>Скачать PDF</a>
       <span class="dot">/</span>
       <span>Москва, RU</span>
       <span class="dot">/</span>
