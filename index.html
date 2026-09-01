@@ -419,7 +419,7 @@ footer .blink {
 
   /* ссылки читаются с бумаги */
   a { color: #000 !important; border-bottom: none !important; }
-  .head .meta a::after, .project .side a::after {
+  .head .meta a::after {
     content: " (" attr(href) ")";
     font-size: 0.85em;
     color: #555;
@@ -428,7 +428,19 @@ footer .blink {
 
   /* плотность: 1-2 страницы */
   .page { max-width: none; padding: 0; }
-  .stack, .project, .edu, .extras-row { grid-template-columns: 84pt 1fr; gap: 18pt; }
+  .stack, .edu, .extras-row { grid-template-columns: 84pt 1fr; gap: 18pt; }
+  /* карточка проекта в одну колонку: в две браузер разносит списки
+     по строкам грида отдельно от своих карточек */
+  .project { display: block; }
+  .project .side {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 3pt 12pt;
+    margin-bottom: 3pt;
+  }
+  .project .side br { display: none; }
+  .project .side .status { margin-top: 0; }
   section { margin: 15pt 0; }
   .head { padding-bottom: 10pt; margin-bottom: 14pt; }
   .head h1 { font-size: 30pt; margin-bottom: 4pt; }
@@ -685,11 +697,11 @@ footer .blink {
       <div class="side">
         2026<br/>
         ML<br/>
-        <span class="status">93 место</span>
+        <span class="status">84 место</span>
       </div>
       <div>
         <h3>E-CUP 2026 (Ozon Tech)</h3>
-        <div class="sub">Задача «Ценность пользователей поиска» — 93 место из 316 команд</div>
+        <div class="sub">Задача «Ценность пользователей поиска» — 84 место из 316 команд</div>
         <p>Прогноз GMV пользователя на 30 дней вперёд по логам поисковой активности: 30 млн записей, 250 тыс. пользователей, метрика RMSLE.</p>
         <ul>
           <li>Независимая модель на градиентном бустинге: LightGBM, CatBoost, XGBoost</li>
